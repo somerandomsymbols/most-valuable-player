@@ -1,143 +1,61 @@
 package game;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Player
 {
-    private String playerName;
-    private String nickname;
-    private int number;
-    private String teamName;
+    private Map<String, String> properties;
 
-    private int scoredPoints;
-    private int rebounds;
-    private int assists;
-
-    private int goalsMade;
-    private int goalsReceived;
-
-    private int ratingPoints;
-
-    public Player(String playerName, String nickname, int number, String teamName, int scoredPoints, int rebounds, int assists)
+    public Player()
     {
-        this.playerName = playerName;
-        this.nickname = nickname;
-        this.number = number;
-        this.teamName = teamName;
-        this.scoredPoints = scoredPoints;
-        this.rebounds = rebounds;
-        this.assists = assists;
+        this.properties = new HashMap<String, String>();
     }
 
-    public Player(String playerName, String nickname, int number, String teamName, int goalsMade, int goalsReceived)
+    public Player(Map<String, String> properties)
     {
-        this.playerName = playerName;
-        this.nickname = nickname;
-        this.number = number;
-        this.teamName = teamName;
-        this.goalsMade = goalsMade;
-        this.goalsReceived = goalsReceived;
+        this.properties = properties;
     }
 
-    public String getPlayerName()
+    public Map<String, String> getProperties()
     {
-        return playerName;
+        return this.properties;
     }
 
-    public void setPlayerName(String playerName)
+    public String getProperty(String propertyName)
     {
-        this.playerName = playerName;
+        return this.properties.get(propertyName);
     }
 
-    public String getNickname()
+    public Integer getIntegerProperty(String propertyName)
     {
-        return nickname;
+        String property = this.getProperty(propertyName);
+
+        if (property == null)
+            return null;
+        else
+            return Integer.valueOf(property);
     }
 
-    public void setNickname(String nickname)
+    public void setProperty(String propertyName, Object value)
     {
-        this.nickname = nickname;
+        this.properties.put(propertyName, String.valueOf(value));
     }
 
-    public int getNumber()
+    public void increaseProperty(String propertyName, int value)
     {
-        return number;
+        Integer property = this.getIntegerProperty(propertyName);
+
+        if (property == null)
+            this.setProperty(propertyName, value);
+        else
+            this.setProperty(propertyName, property + value);
     }
 
-    public void setNumber(int number)
-    {
-        this.number = number;
-    }
-
-    public String getTeamName()
-    {
-        return teamName;
-    }
-
-    public void setTeamName(String teamName)
-    {
-        this.teamName = teamName;
-    }
-
-    public int getScoredPoints() {
-        return scoredPoints;
-    }
-
-    public void setScoredPoints(int scoredPoints)
-    {
-        this.scoredPoints = scoredPoints;
-    }
-
-    public int getRebounds()
-    {
-        return rebounds;
-    }
-
-    public void setRebounds(int rebounds)
-    {
-        this.rebounds = rebounds;
-    }
-
-    public int getAssists()
-    {
-        return assists;
-    }
-
-    public void setAssists(int assists)
-    {
-        this.assists = assists;
-    }
-
-    public int getGoalsMade()
-    {
-        return goalsMade;
-    }
-
-    public void setGoalsMade(int goalsMade)
-    {
-        this.goalsMade = goalsMade;
-    }
-
-    public int getGoalsReceived()
-    {
-        return goalsReceived;
-    }
-
-    public void setGoalsReceived(int goalsReceived)
-    {
-        this.goalsReceived = goalsReceived;
-    }
-
-    public int getRatingPoints()
-    {
-        return ratingPoints;
-    }
-
-    public void setRatingPoints(int ratingPoints)
-    {
-        this.ratingPoints = ratingPoints;
-    }
-
-    public void addRatingPoints(int ratingPoints)
-    {
-        this.ratingPoints += ratingPoints;
+    @Override
+    public String toString() {
+        return "Player{" +
+                "properties=" + properties +
+                '}';
     }
 }
